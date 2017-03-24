@@ -37,6 +37,12 @@ public class IntegerSetTest {
 		assertFalse("delete: did not remove properly", s.isMember(11));
 		s.delete(10);
 	}
-
-
+	
+	@Test
+	public void testToString(){
+		s.add(10);
+		s.add(11);
+		assertTrue("toString: Returned incorrect string representation","{10,11}".equals(s.toString()));
+	}
+	
 }

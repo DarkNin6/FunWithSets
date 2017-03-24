@@ -9,6 +9,30 @@ public class IntegerSet {
 		this.numElements = 0;
 	}
 
+	public boolean equals(Object other) {
+		if (other == null || !(other instanceof IntegerSet)) {
+			return false;
+		}
+		IntegerSet otherIntegerSet = (IntegerSet) other;
+		for (int i=0; i<this.cardinality(); i++) {
+			if (!otherIntegerSet.isMember(this.elements[i])) {
+				return false;
+			}
+		}
+		return (this.cardinality() == otherIntegerSet.cardinality());
+	}
+
+	public String toString() {
+		String result = "{";
+		for (int i=0; i < this.cardinality(); i++) {
+			result += this.elements[i];
+			if (i != this.numElements - 1) {
+				result += ",";
+			}
+		}
+		return result + "}";
+	}
+
 	public boolean isMember(int key) {
 		for(int i=0; i<this.numElements; i++) {
 			if (key == elements[i]) return true;
@@ -32,16 +56,16 @@ public class IntegerSet {
 		elements[numElements] = newMember;
 		numElements++; 
 	}
-	
+
 	public void delete(int key) {
 		for(int i=0; i < this.numElements; i++)
 		{
 			if (this.elements[i] == key)
 				this.elements[i] = this.elements[numElements - 1];
-				numElements--;
+			numElements--;
 		}
 	}
-	
+
 	public long sum() {
 		long sum = 0;
 		for (int i=0; i < this.numElements; i++) {
@@ -49,7 +73,7 @@ public class IntegerSet {
 		}
 		return sum;
 	}
-	
+
 	public boolean allEven() {
 		boolean result = true;
 		for(int i=0; i < this.numElements; i++) {
@@ -57,11 +81,11 @@ public class IntegerSet {
 		}
 		return result;
 	}
-	
+
 	public int cardinality() {
 		return this.numElements;
 	}
-	
+
 	public IntegerSet intersection(IntegerSet b) {
 		IntegerSet c = new IntegerSet(b.cardinality());
 		for(int i=0; i < this.numElements; i++) {
@@ -71,7 +95,7 @@ public class IntegerSet {
 		}
 		return c;
 	}
-	
+
 	public IntegerSet union(IntegerSet b) {
 		IntegerSet c = new IntegerSet(this.cardinality()+b.cardinality());
 		for (int i=0; i<this.cardinality(); i++) {
