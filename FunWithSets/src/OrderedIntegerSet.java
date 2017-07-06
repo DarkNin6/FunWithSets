@@ -4,6 +4,18 @@ public class OrderedIntegerSet extends IntegerSet {
 	public OrderedIntegerSet(int maxNumElements) {
 		super(maxNumElements);
 	}
+	/*
+	 * Returns the position of key within the ordered set and -1 if it is not present
+	 * 
+	 */
+	public int find(int key) {
+		for(int i=0; i<this.cardinality(); i++) {
+			if (this.elements[i] == key) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	public void add(int newMember) {
 		if (this.isFull()) {
